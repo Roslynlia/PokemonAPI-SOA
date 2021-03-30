@@ -23,8 +23,6 @@ class Sets extends Controller
             'x-api-key' => Config::get('api-key')
         ])->get('https://api.pokemontcg.io/v2/sets?page='.$page.'&pageSize=10'.$query)->json();
 
-        echo 'https://api.pokemontcg.io/v2/sets?page='.$page.'&pageSize=10'.$query;
-
         if(count($data['data']) > 0) {
             $pages = floor($data['totalCount']/20) + ($data['totalCount'] % 20 > 0 ? 1 : 0);
         } else {

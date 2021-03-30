@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'api-key' => env('API_KEY'),
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -228,5 +228,4 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-    'api-key' => 'ez7njln6cC0ZSVGmuDwpf04SbBdMUMRRiPCWFlEV',
 ];

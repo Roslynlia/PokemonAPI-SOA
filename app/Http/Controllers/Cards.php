@@ -55,8 +55,6 @@ class Cards extends Controller
         $data = Http::withHeaders([
             'x-api-key' => Config::get('api-key')
         ])->get('https://api.pokemontcg.io/v2/cards?pageSize=20&page='.$page.$query)->json();
-
-        echo 'https://api.pokemontcg.io/v2/cards?pageSize=20&page='.$page.$query;
         
         if(count($data['data']) > 0) {
             $pages = floor($data['totalCount']/20) + ($data['totalCount'] % 20 > 0 ? 1 : 0);

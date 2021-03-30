@@ -97,7 +97,6 @@
 
 <script>
     function changePage(page) {
-        alert(page);
         document.getElementById('pageNo').value = page;
         document.getElementById('formSearch').submit();
     }
