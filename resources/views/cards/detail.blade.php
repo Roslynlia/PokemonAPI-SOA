@@ -37,11 +37,13 @@
                 
                 <span class="text-muted">{{ $data['set']['name'] }} #{{ $data['number'] }} </span> <br>
 
-                <div class="center mt-3">
-                    @foreach($data['types'] as $type)
-                        <a href="{{ url('/?types='.$type) }}" class="btn btn-sm type-{{ $type }} text-white"> {{ $type }} </a>
-                    @endforeach
-                </div>
+                @if(strcasecmp($data['supertype'], "trainer") != 0 && strcasecmp($data['supertype'], "energy") != 0)
+                    <div class="center mt-3">
+                        @foreach($data['types'] as $type)
+                            <a href="{{ url('/?types='.$type) }}" class="btn btn-sm type-{{ $type }} text-white"> {{ $type }} </a>
+                        @endforeach
+                    </div>
+                @endif
 
                 <hr>
                 <table class="table table-borderless table-sm">

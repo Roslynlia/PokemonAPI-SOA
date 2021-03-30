@@ -28,14 +28,14 @@
     </nav>
     
     <div class="container">
+        <h2>Sets Collection</h2>
         <form method="GET" action="{{ route('sets.index') }}" id="formSearch">
             <input type="hidden" name="page" id="pageNo" value="{{ $page }}">
             <div class="form-inline my-2 my-lg-0">
-                <input name="name" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value="{{ Request::get('name') }}">
+                <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value="{{ Request::get('search') }}">
                 <button class="btn btn-success my-2 my-sm-0" type="submit" id="btnSearch">Search</button>
             </div>
         </form>
-        <h2>Sets Collection</h2>
         @if(count($data) > 0)
             <div class="row">
                 @foreach($data as $item)
@@ -56,32 +56,7 @@
                 @endforeach
 
                 </div>
-                <!-- <div>
-                    <ul class="pagination">
-                        @if($page != 1)
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url('/sets?page='.$page-1) }}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
 
-                            <li class="page-item"><a class="page-link" href="{{ url('/sets?page='.$page-1) }}">{{ $page-1 }}</a></li>
-                        @endif
-                        
-                        <li class="page-item active"><a class="page-link" href=""> {{ $page }} </a></li>
-
-                        @if($page != $pages)
-                            <li class="page-item"><a class="page-link" href="{{ url('/sets?page='.$page+1) }}">{{ $page+1 }}</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="{{ url('/sets?page='.$page+1) }}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </div> -->
                 <div>
                     <ul class="pagination">
                         @if($page != 1)
