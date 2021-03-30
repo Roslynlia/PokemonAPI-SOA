@@ -33,11 +33,20 @@
                 <img style="height:400px;" src="{{ $data['images']['large'] }}" alt="{{ $data['name'] }} card">
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4">
-                <h2> {{ $data['name']}} <a href="{{ url('/?supertypes='.$data['supertype']) }}" class="btn btn-secondary btn-sm"> {{ $data['supertype'] }} </a> </h2>
+                @if(isset($data['supertype']))
+                    <h2> {{ $data['name']}} <a href="{{ url('/?supertypes='.$data['supertype']) }}" class="btn btn-secondary btn-sm"> {{ $data['supertype'] }} </a> </h2>
+                @endif
                 
-                <span class="text-muted">{{ $data['set']['name'] }} #{{ $data['number'] }} </span> <br>
+                <span class="text-muted">
+                    @if(isset($data['set']['name']))
+                        <a href="{{ url('/sets?search='.$data['set']['name']) }}" class="text-muted"> {{ $data['set']['name'] }} </a>
+                    @endif
+                    @if(isset($data['number']))
+                        #{{ $data['number'] }}
+                    @endif        
+                </span> <br>
 
-                @if(strcasecmp($data['supertype'], "trainer") != 0 && strcasecmp($data['supertype'], "energy") != 0)
+                @if(isset($data['types']))
                     <div class="center mt-3">
                         @foreach($data['types'] as $type)
                             <a href="{{ url('/?types='.$type) }}" class="btn btn-sm type-{{ $type }} text-white"> {{ $type }} </a>
@@ -48,56 +57,66 @@
                 <hr>
                 <table class="table table-borderless table-sm">
                     <tbody>
-                        <tr>
-                            <td>Artist</td>
-                            <td> : {{ $data['artist'] }}</td>
-                        </tr>
-                        <tr>
-                            <td>Rarity</td>
-                            <td> : <a href="{{ url('/?rarities='.$data['rarity']) }}">{{ $data['rarity'] }} </a></td>
-                        </tr>
-                        <tr>
-                            <td>Total printed</td>
-                            <td> : {{ $data['set']['printedTotal'] }}</td>
-                        </tr>
-                        <tr>
-                            <td>Released on</td>
-                            <td> : {{ $data['set']['releaseDate'] }}</td>
-                        </tr>
+                        @if(isset($data['artist']))
+                            <tr>
+                                <td>Artist</td>
+                                <td> : {{ $data['artist'] }}</td>
+                            </tr>
+                        @endif
+                        @if(isset($data['rarity']))
+                            <tr>
+                                <td>Rarity</td>
+                                <td> : <a href="{{ url('/?rarities='.$data['rarity']) }}">{{ $data['rarity'] }} </a></td>
+                            </tr>
+                        @endif
+                        @if(isset($data['set']['printedTotal']))
+                            <tr>
+                                <td>Total printed</td>
+                                <td> : {{ $data['set']['printedTotal'] }}</td>
+                            </tr>
+                        @endif
+                        @if($data['set']['releaseDate'])
+                            <tr>
+                                <td>Released on</td>
+                                <td> : {{ $data['set']['releaseDate'] }}</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="row justify-content-center mt-5">
-            <div class="col-lg-8 col-md-12 col-sm-12">
-                <h4>Pricelist</h4>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-sm">
-                        <thead class="thead-light">
-                            <tr class="text-center">
-                                <th>Type</th>
-                                <th>Low</th>
-                                <th>Mid</th>
-                                <th>High</th>
-                                <th>Market</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($data['tcgplayer']['prices'] as $item => $price)
-                                <tr class="text-right">
-                                    <td class="text-left"> {{ $item }} </td>
-                                    <td> ${{ $price['low'] }} </td>
-                                    <td> ${{ $price['mid'] }} </td>
-                                    <td> ${{ $price['high'] }} </td>
-                                    <td> ${{ $price['market'] }} </td>
+        @if(count($data['tcgplayer']['prices']) > 0)
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <h4>Pricelist</h4>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-light">
+                                <tr class="text-center">
+                                    <th>Type</th>
+                                    <th>Low</th>
+                                    <th>Mid</th>
+                                    <th>High</th>
+                                    <th>Market</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach($data['tcgplayer']['prices'] as $item => $price)
+                                    <tr class="text-right">
+                                        <td class="text-left"> {{ $item }} </td>
+                                        <td> ${{ $price['low'] }} </td>
+                                        <td> ${{ $price['mid'] }} </td>
+                                        <td> ${{ $price['high'] }} </td>
+                                        <td> ${{ $price['market'] }} </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-right text-muted">Last updated on {{ $data['tcgplayer']['updatedAt'] }}</div>
                 </div>
-                <div class="text-right text-muted">Last updated on {{ $data['tcgplayer']['updatedAt'] }}</div>
             </div>
-        </div>
+        @endif
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

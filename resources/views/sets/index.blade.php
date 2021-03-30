@@ -29,7 +29,7 @@
     
     <div class="container">
         <h2>Sets Collection</h2>
-        <form method="GET" action="{{ route('sets.index') }}" id="formSearch">
+        <form method="GET" action="{{ route('sets.index') }}" id="formSearch" class="mb-2">
             <input type="hidden" name="page" id="pageNo" value="{{ $page }}">
             <div class="form-inline my-2 my-lg-0">
                 <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value="{{ Request::get('search') }}">

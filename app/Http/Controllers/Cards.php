@@ -75,29 +75,6 @@ class Cards extends Controller
 
         $filter = $this->getFilter();
         return View('cards/index', array_merge((array)$home_data, (array)$filter));
-
-        // $data = Http::withHeaders([
-        //     'x-api-key' => Config::get('api-key')
-        // ])->get('https://api.pokemontcg.io/v2/cards?page='.$page.'&pageSize=20&orderBy=supertype,name')->json();
-
-        // // $pages = floor($data['totalCount']/20) + ($data['totalCount'] % 20 > 0 ? 1 : 0);
-
-        // $pages = 12;
-        // if($page > $pages) {
-        //     return redirect()->action(
-        //         'Cards@index', ['page' => $pages]
-        //     );
-        // }
-
-        // $home_data = [
-        //     'data' => $data['data'],
-        //     'page' => $data['page'],
-        //     'pages' => $pages
-        // ];
-
-        // $filter = $this->getFilter();
-
-        // return View('cards/index', array_merge((array)$home_data, (array)$filter));
     }
 
     function detail($id) {
